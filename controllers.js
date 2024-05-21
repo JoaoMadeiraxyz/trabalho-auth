@@ -1,79 +1,79 @@
-const Product = require("./model");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const User = require("./model");
+const SECRET_KEY = "33ade8f1-0755-4760-9646-60cb1a1d4fd4"
 
-// for creating a new product
-// Controller for creating a new product
-exports.createProduct = async (req, res) => {
+// Função para registrar um novo usuário
+async function registerUser(req, res) {
+  const { name, email, password } = req.body;
+
   try {
-    const { name, price, description } = req.body;
-    const product = await Product.create({ name, price, description });
-    res.json({ message: "Product created successfully", product });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await User.create({ name, email, password: hashedPassword });
+    res.status(201).json(user);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: error.message });
   }
-};
+}
 
-// getting all products
-exports.getAllProducts = async (req, res) => {
-  try {
-    const products = await Product.findAll();
-    res.json(products);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
-  }
-};
+// Função para autenticar um usuário
+async function login(req, res) {
+  const { email, password } = req.body;
 
-// Controller for getting a product by ID
-exports.getProductById = async (req, res) => {
   try {
-    const productId = req.params.id;
-    const product = await Product.findByPk(productId);
-    if (!product) {
-      res.status(404).send("Product not found");
-    } else {
-      res.json(product);
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
-  }
-};
 
-// updating a product
-exports.updateProductById = async (req, res) => {
-  try {
-    const productId = req.params.id;
-    const { name, price, description } = req.body;
-    const product = await Product.findByPk(productId);
-    if (!product) {
-      res.status(404).send("Product not found");
-    } else {
-      product.name = name;
-      product.price = price;
-      product.description = description;
-      await product.save();
-      res.json({ message: "Product updated successfully", product });
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: "Invalid password" });
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
-  }
-};
 
-// deleting a product by ID
-exports.deleteProductById = async (req, res) => {
-  try {
-    const productId = req.params.id;
-    const product = await Product.findByPk(productId);
-    if (!product) {
-      res.status(404).send("Product not found");
-    } else {
-      await product.destroy();
-      res.send("Product deleted successfully");
-    }
+    const token = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: "1h" });
+    res.json({ token });
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: error.message });
   }
+}
+
+// Função para obter detalhes do usuário autenticado
+async function getUser(req, res) {
+  try {
+    const user = await User.findByPk(req.userId, {
+      attributes: { exclude: ["password"] },
+    });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+// Middleware para verificar o token JWT
+function authenticateToken(req, res, next) {
+  const token = req.header("Authorization")?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ error: "Access denied" });
+  }
+
+  try {
+    const verified = jwt.verify(token, SECRET_KEY);
+    req.userId = verified.id;
+    next();
+  } catch (error) {
+    res.status(400).json({ error: "Invalid token" });
+  }
+}
+
+// Exporta as funções e o middleware
+module.exports = {
+  registerUser,
+  login,
+  getUser,
+  authenticateToken,
 };

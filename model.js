@@ -1,21 +1,19 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('./db');
+const { DataTypes } = require("sequelize");
+const sequelize = require("./db");
 
-// Define a model for the 'products' table
-const Product = sequelize.define('Product', {
+const User = sequelize.define("User", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  price: {
-    type: DataTypes.FLOAT,
+  email: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: true,
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
 });
 
-// Export the Product model
-module.exports = Product;
+module.exports = User;

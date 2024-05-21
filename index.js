@@ -1,21 +1,21 @@
-const express = require('express');
-const sequelize = require('./db');
-const productRoutes = require('./routes');
+const express = require("express");
+const bodyParser = require("body-parser");
+const userRoutes = require("./routes");
+const sequelize = require("./db");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Sync the model with the database
-sequelize.sync().then(() => {
-  console.log('Database synchronized');
-});
 
 app.use(express.json());
+app.use(bodyParser.json());
+app.use("/api", userRoutes);
 
-// Use product routes
-app.use(productRoutes);
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+sequelize.sync()
+  .then(() => {
+    console.log("Database synchronized");
+    app.listen(3000, () => {
+      console.log("Server is running on port 3000");
+    });
+  })
+  .catch((error) => {
+    console.error("Unable to synchronize the database:", error);
+  });
