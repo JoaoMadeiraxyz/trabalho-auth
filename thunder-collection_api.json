@@ -1,0 +1,61 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "api",
+    "collectionId": "41f1c9c8-9375-409c-ab1d-f2939a901ef5",
+    "dateExported": "2024-06-10T11:33:11.080Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "418fe4d4-de4e-4362-b7e8-44331392d4eb",
+            "colId": "41f1c9c8-9375-409c-ab1d-f2939a901ef5",
+            "containerId": "",
+            "name": "get user",
+            "url": "http://localhost:3000/api/user",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-06-10T11:32:47.123Z",
+            "modified": "2024-06-10T11:32:47.123Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzE4MDE4ODM0LCJleHAiOjE3MTgwMjI0MzR9.DAnH_477Y0G6IJBVM16_k-VRZsjgcH33nOM4EofPDpU"
+            }
+        },
+        {
+            "_id": "04873d19-0cda-44ff-8410-8cc9cf089f96",
+            "colId": "41f1c9c8-9375-409c-ab1d-f2939a901ef5",
+            "containerId": "",
+            "name": "login",
+            "url": "http://localhost:3000/api/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-06-10T11:32:54.166Z",
+            "modified": "2024-06-10T11:32:54.166Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"João Victor\",\n  \"email\": \"jaodisc@gmail.com\",\n  \"password\": \"pass123\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "0044282e-16fb-4179-9304-40c9b6a9b021",
+            "colId": "41f1c9c8-9375-409c-ab1d-f2939a901ef5",
+            "containerId": "",
+            "name": "register user",
+            "url": "http://localhost:3000/api/register",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-06-10T11:33:01.908Z",
+            "modified": "2024-06-10T11:33:01.908Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"João Victor\",\n  \"email\": \"jaodisc@gmail.com\",\n  \"password\": \"pass123\"\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "Q2YVlAAFWiGjSSAnvuvGcCmumqe-_emAnTlRZNw0lwXxN5LsYnbZ-SJYG9LP35JdTV5Cilxd1m0AUp_ehnMTYw"
+}
