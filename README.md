@@ -2,7 +2,7 @@
 
 ## Visão Geral
 
-Esta API oferece funcionalidades de registro, login e obtenção de detalhes do usuário autenticado. A API foi desenvolvida usando Express e Sequelize.
+Esta API oferece funcionalidades de registro, login e obtenção de detalhes do usuário autenticado. A API foi desenvolvida usando Express, Sequelize JSON Web Token, Bcrypt, Sqlite3.
 
 ## Endpoints
 
