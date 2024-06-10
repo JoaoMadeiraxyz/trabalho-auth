@@ -73,8 +73,8 @@ Esta API oferece funcionalidades de registro, login e obtenção de detalhes do 
   "id": 1,
   "name": "John Doe",
   "email": "john@example.com",
-  "createdAt:" "date",
-  "updatedAt:" "date"
+  "createdAt": "date",
+  "updatedAt": "date"
   }
 - **Resposta de Erro:**
   ```json
