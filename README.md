@@ -92,7 +92,7 @@ Esta API oferece funcionalidades de registro, login e obtenção de detalhes do 
 ### Configuração do Ambiente
 1. **Instalar Dependências:**
    ```bash
-   npm install express body-parser sequelize sqlite3 bcrypt jsonwebtoken
+   npm install bcrypt express expressjs jsonwebtoken sequelize sqlite3
 2. **Configurar o Banco de Dados:**
    - Crie um arquivo `**db.js**` com a seguinte configuração:
      ```javascript
