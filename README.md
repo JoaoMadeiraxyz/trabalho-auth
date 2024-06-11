@@ -2,7 +2,7 @@
 
 ## Visão Geral
 
-Esta API oferece funcionalidades de registro, login e obtenção de detalhes do usuário autenticado. A API foi desenvolvida usando Express, Sequelize JSON Web Token, Bcrypt, Sqlite3.
+Esta API oferece funcionalidades de registro, login e obtenção de detalhes do usuário autenticado. A API foi desenvolvida usando Express, Sequelize, JSON Web Token, Bcrypt, Sqlite3.
 
 ## Endpoints
 
@@ -94,7 +94,7 @@ Esta API oferece funcionalidades de registro, login e obtenção de detalhes do 
    ```bash
    npm install bcrypt express expressjs jsonwebtoken sequelize sqlite3
 2. **Configurar o Banco de Dados:**
-   - Crie um arquivo `**db.js**` com a seguinte configuração:
+   - Crie um arquivo **`db.js`** com a seguinte configuração:
      ```javascript
      const { Sequelize } = require("sequelize");
      const sequelize = new Sequelize({
